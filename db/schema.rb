@@ -11,10 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191002164103) do
+ActiveRecord::Schema.define(version: 20191005144132) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
+
+  create_table "areas", force: :cascade do |t|
+    t.string   "name",                                               null: false
+    t.integer  "price",                                              null: false
+    t.geometry "boundaries", limit: {:srid=>0, :type=>"st_polygon"}, null: false
+  end
 
   create_table "cars", force: :cascade do |t|
     t.string   "name",       null: false

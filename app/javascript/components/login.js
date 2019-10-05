@@ -8,6 +8,7 @@ class Login extends React.Component {
     super(props);
     this.state={phone_number: "087886671823", otp: "", input_otp: ""}
     this.GET_TOKEN_URL = "http://localhost:8080/api/v1/tokens/otp";
+    this.LOGIN_URL = "http://localhost:8080/api/v1/tokens"
   }
 
   _getOtp = () => {
@@ -26,7 +27,14 @@ class Login extends React.Component {
   }
 
   _login = () => {
-    console.log("login")
+    axios.post(this.LOGIN_URL, {
+      phone_number: this.state.phone_number,
+      otp: this.state.otp
+    }).then((response) => {
+      console.log(response)
+    }).catch((error) => {
+      console.log(error);
+    })
   }
 
   render () {
@@ -48,7 +56,7 @@ class Login extends React.Component {
           </form>
         </div>}
         {this.state.phone_number && this.state.otp &&
-            <div>
+            <form action="/dashboard/login" method="post">
               <div className="headingOtp">
                 <span>Silahkan Masukkan Kode OTP</span>
               </div>
@@ -62,8 +70,10 @@ class Login extends React.Component {
                     inputStyle={{fontSize: 50}}
                 />
               </div>
-              <button style={{marginTop: 20}} type="button" className="btn btn-primary btn-lg btn-block">Login</button>
-            </div>
+              <input hidden type="text" value={this.state.phone_number} name="phone_number" />
+              <input hidden type="text" value={this.state.input_otp} name="otp" />
+              <input type="submit" style={{marginTop: 20}} className="btn btn-primary btn-lg btn-block" />
+            </form>
         }
       </React.Fragment>
     );

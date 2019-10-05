@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
   namespace :dashboard do
     get 'login', to: 'login#index'
+    post 'login', to: 'login#create'
     get 'areas', to: 'areas#index'
   end
   # You can have the root of your site routed with "root"

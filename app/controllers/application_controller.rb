@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user
-    @jwt_user ||= User.from_jwt(request_authorization_header)
+    @jwt_user ||= User.from_jwt(request_authorization_header || cookies.signed[:jwt])
   end
 
   def current_user!

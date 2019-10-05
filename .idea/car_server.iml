@@ -33,6 +33,7 @@
     <orderEntry type="library" scope="PROVIDED" name="activejob (v4.2.10, RVM: ruby-2.3.4 [car.io]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activemodel (v4.2.10, RVM: ruby-2.3.4 [car.io]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activerecord (v4.2.10, RVM: ruby-2.3.4 [car.io]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="activerecord-postgis-adapter (v3.1.5, RVM: ruby-2.3.4 [car.io]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activesupport (v4.2.10, RVM: ruby-2.3.4 [car.io]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="addressable (v2.7.0, RVM: ruby-2.3.4 [car.io]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="arel (v6.0.4, RVM: ruby-2.3.4 [car.io]) [gem]" level="application" />
@@ -84,6 +85,8 @@
     <orderEntry type="library" scope="PROVIDED" name="rdoc (v4.3.0, RVM: ruby-2.3.4 [car.io]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="react-rails (v2.6.0, RVM: ruby-2.3.4 [car.io]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="redis (v3.3.3, RVM: ruby-2.3.4 [car.io]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rgeo (v0.6.0, RVM: ruby-2.3.4 [car.io]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rgeo-activerecord (v4.0.5, RVM: ruby-2.3.4 [car.io]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rotp (v4.1.0, RVM: ruby-2.3.4 [car.io]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sass (v3.7.4, RVM: ruby-2.3.4 [car.io]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sass-listen (v4.0.0, RVM: ruby-2.3.4 [car.io]) [gem]" level="application" />
