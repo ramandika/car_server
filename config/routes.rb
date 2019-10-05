@@ -4,9 +4,25 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :tokens
-      resources :cars
+      resources :tokens do
+        collection do
+          get :user_info
+          post :otp
+        end
+      end
+      resources :cars do
+        collection do
+          post :qr_scan
+          post :socket_auth
+        end
+      end
+      resources :geolocations
     end
+  end
+
+  namespace :dashboard do
+    get 'login', to: 'login#index'
+    get 'areas', to: 'areas#index'
   end
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

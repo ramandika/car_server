@@ -10,4 +10,19 @@ class Api::V1::TokensController < ApplicationController
       render json: { token: auth_user.to_jwt }, status: :created
     end
   end
+
+  def otp
+    #Get otp
+    user = User.find_by(phone_number: params[:phone_number])
+    if(user)
+      otp = user.sms_otp
+      render json: {otp: otp}
+    else
+      render json: {error: "No user found"}
+    end
+  end
+
+  def user_info
+    render json: {user: current_user}
+  end
 end

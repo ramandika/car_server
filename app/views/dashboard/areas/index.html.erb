@@ -1,0 +1,36 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="row" style="height: 100vh">
+  <div class="col-sm-4">
+    <div style="display:flex; flex-direction: row; justify-content: center; margin-top: 10px">
+      <h5>Area Parkir Terdaftar</h5>
+    </div>
+    <div class="md-form mt-0" style="margin: 10px">
+      <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+    </div>
+    <div class="list-group" style="margin: 10px">
+      <a href="#" class="list-group-item list-group-item-action active">
+        Cras justo odio
+      </a>
+      <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+      <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+      <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+      <a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a>
+    </div>
+  </div>
+  <div id="map" class="col-sm-8">
+    <script>
+        var map;
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: -34.397, lng: 150.644},
+                zoom: 8
+            });
+        }
+    </script>
+  </div>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBq5_3DdJ1T12nlbpuvSQ398MXbNonNb3g&callback=initMap" async defer></script>
+</div>
