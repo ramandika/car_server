@@ -17,6 +17,7 @@ Rails.application.routes.draw do
         end
       end
       resources :geolocations
+      resources :areas
     end
   end
 
