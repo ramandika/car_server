@@ -5,7 +5,7 @@ class Api::V1::AreasController < ApplicationController
     #Shows all area list
     query = params[:query_name]
     if query.present?
-      areas = Area.where("name ILIKE ?", query)
+      areas = Area.where("name ILIKE ?", "%#{query}%")
     else
       areas = Area.all
     end
@@ -16,7 +16,8 @@ class Api::V1::AreasController < ApplicationController
     area = Area.find_by(id: params[:id])
     if area
       boundaries = RGeo::GeoJSON.encode(area.boundaries)
-      render json: {status: :ok, boundaries: boundaries["coordinates"]}
+      coordinates = boundaries["coordinates"]
+      render json: {status: :ok, boundaries: coordinates[0].map{|x| {lat: x[0], lng: x[1]}}}
     else
       render json: {status: :error, message: "Area not found"}
     end

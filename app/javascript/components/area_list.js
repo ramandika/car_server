@@ -6,18 +6,8 @@ import axios from 'axios';
 class AreasList extends React.Component{
     constructor(props){
         super(props)
-        this.state={areas: []}
-        this.GET_AREAS_URL="http://localhost:8080/api/v1/areas"
         this.GET_BOUNDARIES="http://localhost:8080/api/v1/areas/"
-    }
-    componentDidMount() {
-        axios.get(this.GET_AREAS_URL,{
-            'content-type': 'application/json'
-        }).then((response) => {
-            this.setState({areas: response.data.areas})
-        }).catch((error) => {
-            console.log(error);
-        })
+        this.state={}
     }
 
     onClickArea = (id,index) => {
@@ -31,14 +21,14 @@ class AreasList extends React.Component{
     }
 
     render() {
-        const {areas} = this.state
+        const {areas} = this.props
         return(
             <React.Fragment>
                 <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: 10}}>
                     <h5>Area Parkir Terdaftar</h5>
                 </div>
                     <div className="md-form mt-0" style={{margin: 10}}>
-                        <input className="form-control" type="text" placeholder="Search" aria-label="Search" />
+                        <input onChange={(event) => this.props.onSearch(event.target.value)} className="form-control" type="text" placeholder="Search" aria-label="Search" />
                     </div>
                 <ul className="list-group" style={{margin: 10}}>
                     {!!areas && areas.map((area,index) =>(

@@ -31,7 +31,6 @@ export default class SaveAreaDialog extends React.Component{
     }
 
     render() {
-        console.log(this.props.boundaries)
         return(
             <div className={`modal fade ${this.props.show ? 'show' : ''}`} id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" style={{display: this.props.show ? "block" : "none"}} aria-hidden="true">
                 <div className="modal-dialog" role="document">
