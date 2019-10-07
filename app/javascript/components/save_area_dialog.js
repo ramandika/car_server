@@ -22,6 +22,7 @@ export default class SaveAreaDialog extends React.Component{
             }
 
         }).then((response) => {
+            this.props.fetchAreas();
             this.setState({area_name: "", price: ""})
             this.props.closeSaveAreaDialog();
             alert(response.data.message)

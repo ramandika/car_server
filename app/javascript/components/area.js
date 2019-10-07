@@ -10,10 +10,17 @@ class Area extends React.Component{
     constructor(props){
         super(props);
         this.state={areas: []}
+        this.fetchAreas = this.fetchAreas.bind(this)
         this.GET_AREAS_URL="http://localhost:8080/api/v1/areas"
+        this.GET_BOUNDARIES="http://localhost:8080/api/v1/areas/"
     }
 
     componentDidMount() {
+        this.fetchAreas();
+    }
+
+    fetchAreas = () => {
+        console.log("Fetch Areas")
         axios.get(this.GET_AREAS_URL,{
             'content-type': 'application/json'
         }).then((response) => {
@@ -36,6 +43,9 @@ class Area extends React.Component{
     }
 
     onSearch(keyword){
+        if(this.state.areaClicked >= 0){
+            this.setState({areaClicked: undefined, polygon: undefined})
+        }
         axios.get(`${this.GET_AREAS_URL}?query_name=${keyword}`,{
             'content-type': 'application/json'
         }).then((response) => {
@@ -45,13 +55,24 @@ class Area extends React.Component{
         })
     }
 
+    onClickArea = (id,index) => {
+        console.log(`${id}-${index}`)
+        this.setState({areaClicked: index})
+        //Get bondaries
+        axios.get(`${this.GET_BOUNDARIES}/${id}`).then((response) => {
+            this.showPolygon(response.data.boundaries)
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+
     render() {
         const userpos = this.props.coords;
         return(
             <div className="row" style={{height: 100}}>
-                <SaveAreaDialog closeSaveAreaDialog={this.closeSaveAreaDialog.bind(this)} show={this.state.show} boundaries={this.state.boundaries}/>
+                <SaveAreaDialog fetchAreas={this.fetchAreas} closeSaveAreaDialog={this.closeSaveAreaDialog.bind(this)} show={this.state.show} boundaries={this.state.boundaries}/>
                 <div className="col-sm-4">
-                    <AreaList areas={this.state.areas} onSearch={this.onSearch.bind(this)} showPolygon={this.showPolygon.bind(this)} />
+                    <AreaList areas={this.state.areas} areaClicked={this.state.areaClicked} onSearch={this.onSearch.bind(this)} onClickArea={this.onClickArea.bind(this)} showPolygon={this.showPolygon.bind(this)} />
                 </div>
                 <div className=" col-sm-8">
                     <Map polygon={this.state.polygon} showSaveAreaDialog={this.showSaveAreaDialog.bind(this)} user_location={!!userpos ? {lat: userpos.latitude,lng: userpos.longitude} : {lat: -6.1815734,lng: 106.8262006}} />
