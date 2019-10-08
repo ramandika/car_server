@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      resources :users
       resources :tokens do
         collection do
           get :user_info
@@ -17,7 +18,11 @@ Rails.application.routes.draw do
         end
       end
       resources :geolocations
-      resources :areas
+      resources :areas do
+        collection do
+          post :surrounding_areas
+        end
+      end
     end
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191005144132) do
+ActiveRecord::Schema.define(version: 20191007114349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(version: 20191005144132) do
     t.string   "name",                                               null: false
     t.integer  "price",                                              null: false
     t.geometry "boundaries", limit: {:srid=>0, :type=>"st_polygon"}, null: false
+  end
+
+  create_table "billings", force: :cascade do |t|
+    t.integer  "price",          null: false
+    t.integer  "user_id",        null: false
+    t.integer  "area_id",        null: false
+    t.integer  "geolocation_id", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "cars", force: :cascade do |t|
@@ -57,16 +66,18 @@ ActiveRecord::Schema.define(version: 20191005144132) do
   add_index "geolocations", ["tractable_device_id"], name: "index_geolocations_on_tractable_device_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",         null: false
+    t.string   "name",          null: false
     t.string   "address"
     t.string   "email"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.string   "otp_secret"
     t.integer  "otp_counter"
-    t.string   "phone_number", null: false
+    t.string   "phone_number",  null: false
+    t.string   "one_signal_id"
   end
 
+  add_index "users", ["one_signal_id"], name: "index_users_on_one_signal_id", unique: true, using: :btree
   add_index "users", ["phone_number"], name: "index_users_on_phone_number", unique: true, using: :btree
 
   create_table "watcher_monitoreds", force: :cascade do |t|
@@ -77,6 +88,9 @@ ActiveRecord::Schema.define(version: 20191005144132) do
   add_index "watcher_monitoreds", ["monitored"], name: "index_watcher_monitoreds_on_monitored", using: :btree
   add_index "watcher_monitoreds", ["watcher"], name: "index_watcher_monitoreds_on_watcher", using: :btree
 
+  add_foreign_key "billings", "areas"
+  add_foreign_key "billings", "geolocations"
+  add_foreign_key "billings", "users"
   add_foreign_key "cars", "users"
   add_foreign_key "watcher_monitoreds", "users", column: "monitored"
   add_foreign_key "watcher_monitoreds", "users", column: "watcher"

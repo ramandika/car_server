@@ -9,7 +9,7 @@ class Api::V1::AreasController < ApplicationController
     else
       areas = Area.all
     end
-    render json: {status: :ok, areas: areas.as_json(:except => [:boundaries])}
+    render json: {status: :ok, areas: areas}
   end
 
   def show
@@ -33,6 +33,22 @@ class Api::V1::AreasController < ApplicationController
     else
       render json: {status: :error, message: area.errors}
     end
+  end
+
+  def surrounding_areas
+    user_location = params[:user_location]
+    user_location = RGeo::Geos.factory.point(user_location[:latitude], user_location[:longitude])
+    distance = 200 #1 Km
+    areas = Area.where("ST_Distance(boundaries::geography,?::geography) < ?",user_location, distance)
+
+    areas.each_with_index do |area,index|
+      boundaries = RGeo::GeoJSON.encode(area.boundaries)
+      coordinates = boundaries["coordinates"]
+      area.boundaries =  coordinates[0].map{|x| {latitude: x[0], longitude: x[1]}}
+      areas[index] = area
+    end
+
+    render json: {status: :ok, areas: areas}
   end
 
   private

@@ -32,7 +32,7 @@ class Api::V1::CarsController < ApplicationController
   def socket_auth
     param = filter_params_socket_auth
     wm = WatcherMonitored.where(watcher: current_user.id, monitored: filter_params_socket_auth["room"].to_i)
-    if wm.blank?
+    if wm.blank? and !is_own_car?
       render json: {status: :error, message: "Socket auth ditolak"}
     else
       render json: {status: :ok, message: "Socket auth sukses"}
@@ -40,6 +40,10 @@ class Api::V1::CarsController < ApplicationController
   end
 
   private
+  def is_own_car?
+    filter_params_socket_auth["room"].to_i == current_user.id
+  end
+
   def filter_car_params
     params.require(:car).permit(:name, :brand, :model, :year)
   end
