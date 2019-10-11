@@ -11,8 +11,8 @@ class Area extends React.Component{
         super(props);
         this.state={areas: []}
         this.fetchAreas = this.fetchAreas.bind(this)
-        this.GET_AREAS_URL="http://localhost:8080/api/v1/areas"
-        this.GET_BOUNDARIES="http://localhost:8080/api/v1/areas/"
+        this.GET_AREAS_URL="http://car-io.montrax.id/api/v1/areas"
+        this.GET_BOUNDARIES="http://car-io.montrax.id/api/v1/areas/"
     }
 
     componentDidMount() {

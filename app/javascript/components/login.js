@@ -7,8 +7,8 @@ class Login extends React.Component {
   constructor(props){
     super(props);
     this.state={phone_number: "087886671823", otp: "", input_otp: ""}
-    this.GET_TOKEN_URL = "http://localhost:8080/api/v1/tokens/otp";
-    this.LOGIN_URL = "http://localhost:8080/api/v1/tokens"
+    this.GET_TOKEN_URL = "http://car-io.montrax.id/api/v1/tokens/otp";
+    this.LOGIN_URL = "http://car-io.montrax.id/api/v1/tokens"
   }
 
   _getOtp = () => {

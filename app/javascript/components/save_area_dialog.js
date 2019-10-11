@@ -6,7 +6,7 @@ export default class SaveAreaDialog extends React.Component{
     constructor(props){
         super(props)
         this.state={area_name: "",price: ""}
-        this.CREATE_AREA_URL="http://localhost:8080/api/v1/areas"
+        this.CREATE_AREA_URL="http://car-io.montrax.id/api/v1/areas"
     }
 
     onSubmit(){
